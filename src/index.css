@@ -14,6 +14,15 @@ html {
 
 .app {
   width: 100%;
+  background-image: linear-gradient(
+    to right bottom,
+    #faedcd,
+    #efdbb5,
+    #e6c89e,
+    #ddb688,
+    #d4a373
+  );
+  height: 100dvh;
 }
 
 .header {
@@ -21,12 +30,17 @@ html {
   font-size: 7rem;
   margin-top: 2rem;
   margin-bottom: 4rem;
-  background-color: antiquewhite;
   display: inline-block;
   position: relative;
   left: 50%;
   transform: translate(-50%);
-  padding: 1rem 2rem;
+  padding: 1rem 5rem;
+  border-radius: 5px;
+  background-color: rgb(255, 201, 85);
+  color: rgb(53, 53, 53);
+  box-shadow: 4px 4px 8px #00000046;
+  letter-spacing: 15px;
+  font-weight: bold;
 }
 
 .game-container {
@@ -36,35 +50,69 @@ html {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 30rem);
+  grid-template-columns: repeat(3, 35rem);
+  grid-template-rows: repeat(3, 20rem);
   text-align: center;
   width: max-content;
-  padding-left: 10rem;
   margin-right: 5rem;
-  gap: 2px;
+  margin-left: 20rem;
+  box-shadow: 6px 6px 14px #00000046;
+  outline: 5px dashed #101010b2;
+  outline-offset: 1rem;
+}
+
+.grid-cell:nth-child(3),
+.grid-cell:nth-child(6),
+.grid-cell:nth-child(9) {
+  border-right: none;
+}
+
+.grid-cell:nth-child(7),
+.grid-cell:nth-child(8),
+.grid-cell:nth-child(9) {
+  border-bottom: none;
 }
 
 .grid-cell {
-  font-size: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12rem;
   padding: 5rem;
-  background-color: antiquewhite;
-  border: 3px solid black;
-  border-radius: 5px;
-  cursor: pointer;
+  border: none;
+  border-bottom: 3px solid #101010b2;
+  border-right: 3px solid #101010b2;
   transition: all 0.3s;
+  color: rgb(53, 53, 53);
+  background-color: rgb(255, 201, 85);
 }
 
 .grid-cell:hover {
+  border: none;
   background-color: beige;
+  cursor: pointer;
+  transform: translateY(-8px);
 }
 
 .players-container {
   display: grid;
   grid-template-columns: 25rem;
   align-content: space-around;
+  background-color: #101010b2;
+  box-shadow: 3px 3px 4px #00000046, -3px -3px 4px #00000046;
+  border-radius: 5px;
+  outline: 5px double #101010b2;
+  outline-offset: 3px;
 }
 
 .players {
   font-size: 2rem;
   text-align: center;
+  color: white;
+}
+
+.player-name {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 8px double rgb(255, 201, 85);
 }
