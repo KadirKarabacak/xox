@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <GridContainer />
     </div>
   );
 }
 
-export default App;
+function Header() {
+  return <header className="header">XOX Game</header>;
+}
+
+function GridContainer() {
+  return (
+    <div className="game-container">
+      <div className="grid-container">
+        <GridCells />
+        <GridCells />
+        <GridCells />
+        <GridCells />
+        <GridCells />
+        <GridCells />
+        <GridCells />
+        <GridCells />
+        <GridCells />
+      </div>
+      <Players />
+    </div>
+  );
+}
+
+function GridCells() {
+  return <div className="grid-cell">X</div>;
+}
+
+function Players() {
+  return (
+    <div className="players-container">
+      <div className="players player--1">
+        <h1>Player 1</h1>
+        <span>Score 1</span>
+      </div>
+      <div className="players player--2">
+        <h1>Player 2</h1>
+        <span>Score 2</span>
+      </div>
+    </div>
+  );
+}

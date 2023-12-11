@@ -1,13 +1,70 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Nunito:ital,wght@1,500&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  font-size: 62.5%;
+}
+
+.app {
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  font-size: 7rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  background-color: antiquewhite;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 1rem 2rem;
+}
+
+.game-container {
+  display: grid;
+  grid-template-columns: min-content min-content;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 30rem);
+  text-align: center;
+  width: max-content;
+  padding-left: 10rem;
+  margin-right: 5rem;
+  gap: 2px;
+}
+
+.grid-cell {
+  font-size: 7rem;
+  padding: 5rem;
+  background-color: antiquewhite;
+  border: 3px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.grid-cell:hover {
+  background-color: beige;
+}
+
+.players-container {
+  display: grid;
+  grid-template-columns: 25rem;
+  align-content: space-around;
+}
+
+.players {
+  font-size: 2rem;
+  text-align: center;
 }
