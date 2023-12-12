@@ -1,4 +1,13 @@
+import { useState } from "react";
 import "./index.css";
+
+// FUNCTIONALITY
+// const player1 = "X";
+// const player2 = "O";
+
+//! OLASI DURUMLAR :
+// 1: useState("X") kullanarak default oyuncuyu X yap, her X girildiğinde oyuncuyu O'ya çevir.
+// 2: const [content, setContent] useState("") kullanarak buton içeriğini oyuncunun içeriğine ayarla.
 
 // LAYOUT
 export default function App() {
@@ -10,31 +19,50 @@ export default function App() {
   );
 }
 
+// Header
 function Header() {
   return <header className="header">XØX</header>;
 }
 
 function GridContainer() {
+  // Each cell has different num, so i can try to check win and draw possibility
+  const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [player, setPlayer] = useState("X");
+
+  // Defining it on container to update whole ui to change player. Otherwise it changes only for one cell
+  function setPlayers() {
+    setPlayer(player === "X" ? "O" : "X");
+  }
   return (
     <div className="game-container">
       <div className="grid-container">
-        <GridCells />
-        <GridCells />
-        <GridCells />
-        <GridCells />
-        <GridCells />
-        <GridCells />
-        <GridCells />
-        <GridCells />
-        <GridCells />
+        {nums.map((num) => {
+          // Then set props for child component to change content and player on each click.
+          return (
+            <GridCells setPlayers={setPlayers} player={player} number={num} />
+          );
+        })}
       </div>
       <Players />
     </div>
   );
 }
 
-function GridCells() {
-  return <button className="grid-cell">X</button>;
+function GridCells({ num, player, setPlayers }) {
+  //! If we define player change here, it updates only one cell because state is isolated for each comp
+  // const [player, setPlayer] = useState("X");
+  const [content, setContent] = useState(null);
+
+  function setContents() {
+    setPlayers();
+    setContent(player);
+  }
+
+  return (
+    <button onClick={setContents} className="grid-cell">
+      {content}
+    </button>
+  );
 }
 
 function Players() {
@@ -52,5 +80,3 @@ function Players() {
     </div>
   );
 }
-
-// FUNCTIONALITY

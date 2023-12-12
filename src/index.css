@@ -98,7 +98,7 @@ html {
   display: grid;
   grid-template-columns: 25rem;
   align-content: space-around;
-  background-color: #101010b2;
+  background-color: #101010da;
   box-shadow: 3px 3px 4px #00000046, -3px -3px 4px #00000046;
   border-radius: 5px;
   outline: 5px double #101010b2;
