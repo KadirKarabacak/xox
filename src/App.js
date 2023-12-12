@@ -53,6 +53,7 @@ function GridCells({ num, player, setPlayers }) {
   // const [player, setPlayer] = useState("X");
   const [content, setContent] = useState(null);
 
+  // Set content into button and change player
   function setContents() {
     setPlayers();
     setContent(player);
@@ -65,16 +66,17 @@ function GridCells({ num, player, setPlayers }) {
   );
 }
 
+// Container holds player names and scores.
 function Players() {
   return (
     <div className="players-container">
       <div className="players player--1">
-        <h1 className="player-name">Player 1</h1>
+        <h1 className="player-name">Player X</h1>
         <span className="player-score">Score 1</span>
       </div>
       <div className="players">Player 1's turn</div>
       <div className="players player--2">
-        <h1 className="player-name">Player 2</h1>
+        <h1 className="player-name">Player O</h1>
         <span className="player-score">Score 2</span>
       </div>
     </div>
