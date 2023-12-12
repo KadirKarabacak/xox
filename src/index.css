@@ -114,5 +114,16 @@ html {
 .player-name {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 8px double rgb(255, 201, 85);
+  transition: all 0.3s;
+}
+
+.player-turn {
+  font-size: 4rem;
+  color: rgb(255, 201, 85);
+}
+
+.active {
+  color: rgb(255, 201, 85);
+  scale: 1.1;
+  transform: translateY(3px);
 }
