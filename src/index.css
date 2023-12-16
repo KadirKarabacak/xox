@@ -88,7 +88,7 @@ html {
   .app {
     justify-content: flex-start;
     padding-bottom: 0;
-    padding-top: 6rem;
+    padding-top: 4rem;
   }
 }
 
@@ -106,15 +106,44 @@ html {
   box-shadow: 4px 4px 8px #00000046;
   letter-spacing: 15px;
   font-weight: bold;
+  margin-left: 14rem;
 }
 @media only screen and (max-width: 100em) {
   .header {
     margin-bottom: 2.5rem;
   }
 }
+
+/* 850px */
+@media only screen and (max-width: 53.12em) {
+  .header {
+    margin-left: 10rem;
+    font-size: 4rem;
+  }
+}
+
 @media only screen and (max-width: 28.12em) {
   .header {
-    display: none;
+    font-size: 6rem;
+    margin-left: 3rem;
+  }
+}
+@media only screen and (max-width: 23.75em) {
+  .header {
+    font-size: 4rem;
+  }
+}
+
+.header-replay {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 40rem;
+}
+@media only screen and (max-width: 53.12em) {
+  .header-replay {
+    padding: 0;
   }
 }
 
@@ -131,7 +160,7 @@ html {
   .game-container {
     width: 100dvw;
     height: 100dvh;
-    padding: 10rem 0;
+    padding: 5rem 0 15rem 0;
   }
 }
 
@@ -221,14 +250,34 @@ html {
 }
 
 .grid-cell-blocked {
-  background-color: rgba(255, 201, 85, 0.3);
+  background-color: #dda15e;
+}
+
+.grid-cell-winner {
+  transform: translateY(-8px);
+  background-color: #606c38;
+  animation: winnerAnimation 1.5s infinite;
+  backface-visibility: hidden;
+  color: white;
+}
+
+@keyframes winnerAnimation {
+  0% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(-3px);
+  }
 }
 
 .grid-cell:hover {
   border: none;
   background-color: beige;
   cursor: pointer;
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.8));
 }
 
@@ -270,11 +319,47 @@ html {
 
 .player-turn {
   font-size: 3rem;
-  border-bottom: 1px solid rgb(255, 201, 85);
 }
 
 .active {
   color: rgb(255, 201, 85);
   scale: 1.15;
   transform: translateY(3px);
+}
+
+.replay-button {
+  background-color: rgb(255, 201, 85);
+  border: none;
+  padding: 1.5rem 4rem;
+  box-shadow: 4px 4px 8px #00000046;
+  cursor: pointer;
+  outline-offset: -8px;
+  outline: 4px solid rgb(53 53 53 / 85%);
+  font-size: 4rem;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  color: rgb(53 53 53 / 85%);
+  transition: all 0.3s;
+  border-radius: 3px;
+  margin-left: 2rem;
+}
+
+/* 850px */
+@media only screen and (max-width: 53.12em) {
+  .replay-button {
+    font-size: 2rem;
+    padding: 1.2rem 3rem;
+  }
+}
+
+.replay-button:hover {
+  color: rgb(53 53 53);
+  outline: 4px solid rgb(53 53 53);
+  transform: translateY(-2px);
+  box-shadow: 4px 8px 8px #00000046;
+}
+
+.replay-button:active {
+  box-shadow: 4px 4px 8px #00000046;
+  transform: translateY(0);
 }

@@ -1,15 +1,14 @@
 import { useState } from "react";
 import "./index.css";
-
 // LAYOUT
-export default function App() {
-  return (
-    <div className="app">
-      <Header />
-      <GridContainer />
-    </div>
-  );
-}
+// export default function App() {
+//   return (
+//     // <div className="app">
+//     //   <Header />
+//     //   <GridContainer />
+//     // </div>
+//   );
+// }
 
 // Header
 function Header() {
@@ -17,7 +16,7 @@ function Header() {
 }
 
 // Grid container
-function GridContainer() {
+export default function App() {
   // [null, null, null, null, null, null, null, null, null]
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [player, setPlayer] = useState(true);
@@ -65,7 +64,8 @@ function GridContainer() {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        console.log(a, b, c);
+        //: To do scores
+
         // Return X or O by equality.
         return squares[a];
       }
@@ -89,32 +89,47 @@ function GridContainer() {
     }
   }
 
+  function handleReset() {
+    setSquares(Array(9).fill(null));
+    setPlayer(true);
+  }
+
   return (
-    <div className="game-container">
-      <div className="grid-container">
-        {/* Creates 9 buttons also "values" equals "nums" */}
-        {nums.map((num) => {
-          return (
-            <GridCells
-              onSquareClick={() => handleClick(num)}
-              value={squares[num]}
-              key={num}
-            />
-          );
-        })}
+    <div className="app">
+      <div className="header-replay">
+        <Header />
+        <Replay onReset={handleReset} />
       </div>
-      {/* Change the content */}
-      <Players status={status} player={player} />
+      <div className="game-container">
+        <div className="grid-container">
+          {/* Creates 9 buttons also "values" equals "nums" */}
+          {nums.map((num) => {
+            return (
+              <GridCells
+                winner={winner}
+                onSquareClick={() => handleClick(num)}
+                value={squares[num]}
+                key={num}
+              />
+            );
+          })}
+        </div>
+        {/* Change the content */}
+        <Players status={status} player={player} />
+      </div>
     </div>
   );
 }
 
 // Buttons
-function GridCells({ value, onSquareClick }) {
+function GridCells({ value, onSquareClick, winner }) {
+  const winnerClass = "grid-cell-winner";
   return (
     <button
       onClick={onSquareClick}
-      className={`grid-cell ${value ? "grid-cell-blocked" : ""}`}
+      className={`grid-cell ${value === winner && winner ? winnerClass : ""} ${
+        value ? "grid-cell-blocked" : ""
+      }`}
     >
       {value}
     </button>
@@ -146,6 +161,10 @@ function Players({ status }) {
   );
 }
 
-// function Replay() {
-//   return <button className="replay-button">Replay</button>;
-// }
+function Replay({ onReset }) {
+  return (
+    <button onClick={onReset} type="reset" className="replay-button">
+      Replay
+    </button>
+  );
+}
