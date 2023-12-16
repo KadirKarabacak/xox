@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div className="app">
       <Header />
-      <Replay />
+      {/* <Replay /> */}
       <GridContainer />
     </div>
   );
@@ -23,97 +23,82 @@ function GridContainer() {
   const [player, setPlayer] = useState("X");
   const [winner, setWinner] = useState(null);
 
-  function checkWinner() {
+  function controlWinner() {
     const [...cells] = document.querySelectorAll(".grid-cell");
 
+    if (winner) return;
     // Row Conditions "X"
+    console.log(cells[0]?.textContent);
     const conditionRowX1 =
-      cells[0].innerText === "X" &&
-      cells[1].innerText === "X" &&
-      cells[2].innerText === "X";
-
+      cells[0]?.textContent === "X" &&
+      cells[1]?.textContent === "X" &&
+      cells[2]?.textContent === "X";
     const conditionRowX2 =
-      cells[3].innerText === "X" &&
-      cells[4].innerText === "X" &&
-      cells[5].innerText === "X";
-
+      cells[3]?.textContent === "X" &&
+      cells[4]?.textContent === "X" &&
+      cells[5]?.textContent === "X";
     const conditionRowX3 =
-      cells[6].innerText === "X" &&
-      cells[7].innerText === "X" &&
-      cells[8].innerText === "X";
-
+      cells[6]?.textContent === "X" &&
+      cells[7]?.textContent === "X" &&
+      cells[8]?.textContent === "X";
     // Column Conditions "X"
     const conditionColumnX1 =
-      cells[0].innerText === "X" &&
-      cells[3].innerText === "X" &&
-      cells[6].innerText === "X";
-
+      cells[0]?.textContent === "X" &&
+      cells[3]?.textContent === "X" &&
+      cells[6]?.textContent === "X";
     const conditionColumnX2 =
-      cells[1].innerText === "X" &&
-      cells[4].innerText === "X" &&
-      cells[7].innerText === "X";
-
+      cells[1]?.textContent === "X" &&
+      cells[4]?.textContent === "X" &&
+      cells[7]?.textContent === "X";
     const conditionColumnX3 =
-      cells[2].innerText === "X" &&
-      cells[5].innerText === "X" &&
-      cells[8].innerText === "X";
-
+      cells[2]?.textContent === "X" &&
+      cells[5]?.textContent === "X" &&
+      cells[8]?.textContent === "X";
     // Cross Conditions "X"
     const conditionCrossX1 =
-      cells[0].innerText === "X" &&
-      cells[4].innerText === "X" &&
-      cells[8].innerText === "X";
-
+      cells[0]?.textContent === "X" &&
+      cells[4]?.textContent === "X" &&
+      cells[8]?.textContent === "X";
     const conditionCrossX2 =
-      cells[2].innerText === "X" &&
-      cells[4].innerText === "X" &&
-      cells[6].innerText === "X";
-
+      cells[2]?.textContent === "X" &&
+      cells[4]?.textContent === "X" &&
+      cells[6]?.textContent === "X";
     ///////////////////////////////////////////////////////////////
-
     // Row Conditions "X"
     const conditionRowO1 =
-      cells[0].innerText === "O" &&
-      cells[1].innerText === "O" &&
-      cells[2].innerText === "O";
-
+      cells[0]?.textContent === "O" &&
+      cells[1]?.textContent === "O" &&
+      cells[2]?.textContent === "O";
     const conditionRowO2 =
-      cells[3].innerText === "O" &&
-      cells[4].innerText === "O" &&
-      cells[5].innerText === "O";
-
+      cells[3]?.textContent === "O" &&
+      cells[4]?.textContent === "O" &&
+      cells[5]?.textContent === "O";
     const conditionRowO3 =
-      cells[6].innerText === "O" &&
-      cells[7].innerText === "O" &&
-      cells[8].innerText === "O";
-
+      cells[6]?.textContent === "O" &&
+      cells[7]?.textContent === "O" &&
+      cells[8]?.textContent === "O";
     // Column Conditions "O"
     const conditionColumnO1 =
-      cells[0].innerText === "O" &&
-      cells[3].innerText === "O" &&
-      cells[6].innerText === "O";
-
+      cells[0]?.textContent === "O" &&
+      cells[3]?.textContent === "O" &&
+      cells[6]?.textContent === "O";
     const conditionColumnO2 =
-      cells[1].innerText === "O" &&
-      cells[4].innerText === "O" &&
-      cells[7].innerText === "O";
-
+      cells[1]?.textContent === "O" &&
+      cells[4]?.textContent === "O" &&
+      cells[7]?.textContent === "O";
     const conditionColumnO3 =
-      cells[2].innerText === "O" &&
-      cells[5].innerText === "O" &&
-      cells[8].innerText === "O";
-
+      cells[2]?.textContent === "O" &&
+      cells[5]?.textContent === "O" &&
+      cells[8]?.textContent === "O";
     // Cross Conditions "O"
     const conditionCrossO1 =
-      cells[0].innerText === "O" &&
-      cells[4].innerText === "O" &&
-      cells[8].innerText === "O";
-
+      cells[0]?.textContent === "O" &&
+      cells[4]?.textContent === "O" &&
+      cells[8]?.textContent === "O";
     const conditionCrossO2 =
-      cells[2].innerText === "O" &&
-      cells[4].innerText === "O" &&
-      cells[6].innerText === "O";
-
+      cells[2]?.textContent === "O" &&
+      cells[4]?.textContent === "O" &&
+      cells[6]?.textContent === "O";
     if (
       conditionRowX1 ||
       conditionRowX2 ||
@@ -124,9 +109,8 @@ function GridContainer() {
       conditionCrossX1 ||
       conditionCrossX2
     ) {
-      console.log("Winner X");
+      setWinner("X");
     }
-
     if (
       conditionRowO1 ||
       conditionRowO2 ||
@@ -137,15 +121,10 @@ function GridContainer() {
       conditionCrossO1 ||
       conditionCrossO2
     ) {
-      console.log("Winner O");
+      setWinner("O");
     }
   }
-
-  // Defining it on container to update whole ui to change player. Otherwise it changes only for one cell
-  function changePlayers() {
-    checkWinner();
-    setPlayer(player === "X" ? "O" : "X");
-  }
+  controlWinner();
 
   return (
     <div className="game-container">
@@ -154,33 +133,48 @@ function GridContainer() {
           // Then set props for child component to change content and player on each click.
           return (
             <GridCells
-              checkWinner={checkWinner}
-              changePlayer={changePlayers}
+              winner={winner}
+              onSetPlayer={setPlayer}
               player={player}
-              number={num}
+              key={num}
+              num={num}
             />
           );
         })}
       </div>
-      <Players player={player} winner={winner} />
+      <Players winner={winner} player={player} />
     </div>
   );
 }
 
-function GridCells({ number, player, changePlayer, checkWinner }) {
-  //! If we define player change here, it updates only one cell because state is isolated for each comp
-  // const [player, setPlayer] = useState("X");
-  const [content, setContent] = useState(null);
+function GridCells({ player, num, onSetPlayer, winner }) {
+  const [content, setContent] = useState("X");
+  //! Başlangıçta "" değeri verdiğim için ilk tıklamayı saymıyor. Çözmen lazım
 
   // Set content into button and change player
   function setContents() {
+    if (content || winner) return;
+
+    // Set content
     setContent(player);
-    changePlayer();
-    checkWinner();
+
+    // Change player after click
+    onSetPlayer(player === "X" ? "O" : "X");
+
+    // Draw clause
+    if (!winner && checkDraw()) {
+      console.log("Berabere");
+    }
+  }
+
+  // Draw
+  function checkDraw() {
+    const [...cells] = document.querySelectorAll(".grid-cell");
+    return cells.every((cell) => cell.innerText);
   }
 
   return (
-    <button number={number} onClick={setContents} className="grid-cell">
+    <button num={num} onClick={setContents} className="grid-cell">
       {content}
     </button>
   );
@@ -197,7 +191,7 @@ function Players({ player, winner }) {
         <span className="player-score">Score: </span>
       </div>
       <div className="players">
-        Player <span className="player-turn">{player}</span>'s turn
+        Player <span className="player-turn">{winner}</span> is winner!
       </div>
       <div className="players player--2">
         <h1 className={`player-name ${player === "O" ? "active" : ""}`}>
@@ -209,6 +203,6 @@ function Players({ player, winner }) {
   );
 }
 
-function Replay() {
-  return <button className="replay-button">Replay</button>;
-}
+// function Replay() {
+//   return <button className="replay-button">Replay</button>;
+// }
