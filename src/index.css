@@ -14,6 +14,10 @@
 /* @media only screen and (max-width: 28.12em) {
 } */
 
+/* 1440px */
+/* @media only screen and (max-width: 90em) {
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -88,7 +92,6 @@ html {
   .app {
     justify-content: flex-start;
     padding-bottom: 0;
-    padding-top: 4rem;
   }
 }
 
@@ -141,6 +144,7 @@ html {
   align-items: center;
   padding: 0 40rem;
 }
+
 @media only screen and (max-width: 53.12em) {
   .header-replay {
     padding: 0;
@@ -156,11 +160,12 @@ html {
     grid-template-columns: 1fr;
   }
 }
+
 @media only screen and (max-width: 28.12em) {
   .game-container {
     width: 100dvw;
     height: 100dvh;
-    padding: 5rem 0 15rem 0;
+    padding: 5rem 0 13rem 0;
   }
 }
 
@@ -178,12 +183,20 @@ html {
 
 @media only screen and (max-width: 100em) {
   .grid-container {
-    grid-template-columns: repeat(3, minmax(20rem, 35rem));
+    grid-template-rows: repeat(3, 17rem);
+    grid-template-columns: repeat(3, minmax(17rem, 30rem));
     margin-left: 0;
     margin-bottom: 3rem;
     margin-right: 0;
   }
 }
+
+/* @media only screen and (max-width: 90em) {
+  .grid-container {
+    grid-template-rows: repeat(3, 17rem);
+    grid-template-columns: repeat(3, minmax(17rem, 30rem));
+  }
+} */
 
 @media only screen and (max-width: 68.75em) {
   .grid-container {
@@ -259,6 +272,8 @@ html {
   animation: winnerAnimation 1.5s infinite;
   backface-visibility: hidden;
   color: white;
+  outline-offset: -2rem;
+  outline: 1rem solid rgba(0, 0, 0, 0.637);
 }
 
 @keyframes winnerAnimation {
@@ -342,6 +357,11 @@ html {
   transition: all 0.3s;
   border-radius: 3px;
   margin-left: 2rem;
+}
+@media only screen and (max-width: 90em) {
+  .replay-button {
+    font-size: 3rem;
+  }
 }
 
 /* 850px */
