@@ -1,4 +1,4 @@
-# XOX Game
+# XOX Game with React
 
 ### Algorithm :
 
