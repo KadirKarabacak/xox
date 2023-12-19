@@ -173,7 +173,7 @@ html {
 @media only screen and (max-width: 28.12em) {
   .game-container {
     width: 100dvw;
-    height: 100dvh;
+    height: calc(100dvh - 15rem);
     /* height: 120dvh; */
     padding: 5rem 0 13rem 0;
   }
