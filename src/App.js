@@ -121,12 +121,14 @@ export default function App() {
     setScoreX(0);
   }
 
-  const score5 = scoreO || scoreX === 5;
-
   return (
     <div className="app">
-      {score5 && (
-        <WinnerModal winner={winner} handleCloseModal={handleCloseModal} />
+      {(scoreX === 5 || scoreO === 5) && (
+        <WinnerModal
+          winner={winner}
+          handleCloseModal={handleCloseModal}
+          handleReset={handleReset}
+        />
       )}
       <div className="header-replay">
         <Header />
@@ -182,7 +184,9 @@ function Players({ status, scoreX, scoreO }) {
         <h1 className={`player-name ${status === "X" ? "active" : ""}`}>
           Player X
         </h1>
-        <span className="player-score">ScoreX || {scoreX} </span>
+        <span className="player-score">
+          Score <i class="fa-solid fa-star"></i> {scoreX}
+        </span>
       </div>
       <div className="players">
         <span className="player-turn">
@@ -193,19 +197,22 @@ function Players({ status, scoreX, scoreO }) {
         <h1 className={`player-name ${status === "O" ? "active" : ""}`}>
           Player O
         </h1>
-        <span className="player-score">ScoreO || {scoreO} </span>
+        <span className="player-score">
+          Score <i class="fa-solid fa-star"></i> {scoreO}
+        </span>
       </div>
     </div>
   );
 }
 
 // Modal for winner situation
-function WinnerModal({ handleCloseModal, winner }) {
+function WinnerModal({ handleCloseModal, handleReset, winner }) {
   const [isOpen, setIsOpen] = useState(true);
 
   function closeModal() {
     setIsOpen(false);
     handleCloseModal();
+    handleReset();
   }
   return (
     <>
@@ -223,7 +230,9 @@ function WinnerModal({ handleCloseModal, winner }) {
                 &times;
               </span>
               <div className="modal-content">
-                <p className="modal-text">Winner {winner}</p>
+                <p className="modal-text">
+                  Winner <span className="winner-name">{winner}</span>
+                </p>
               </div>
             </div>
           </CSSTransition>

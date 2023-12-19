@@ -109,7 +109,11 @@ html {
   position: relative;
   padding: 1rem 5rem;
   border-radius: 5px;
-  background-color: rgb(255, 201, 85);
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(250 85 85),
+    rgb(255 201 85)
+  );
   color: rgb(53, 53, 53);
   box-shadow: 4px 4px 8px #00000046;
   letter-spacing: 15px;
@@ -227,18 +231,6 @@ html {
   
 } */
 
-.grid-cell:nth-child(3),
-.grid-cell:nth-child(6),
-.grid-cell:nth-child(9) {
-  border-right: none;
-}
-
-.grid-cell:nth-child(7),
-.grid-cell:nth-child(8),
-.grid-cell:nth-child(9) {
-  border-bottom: none;
-}
-
 .grid-cell {
   display: flex;
   justify-content: center;
@@ -253,6 +245,55 @@ html {
   background-color: rgb(255, 201, 85);
   font-weight: bold;
 }
+
+/* Button deneme */
+.grid-cell {
+  cursor: pointer;
+  font-size: 12rem;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  border: none;
+  border-bottom: 3px solid #101010b2;
+  border-right: 3px solid #101010b2;
+  padding: 0.8rem 2.1rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 531.28 200'%3E%3Cdefs%3E%3Cstyle%3E .shape %7B fill: %23FF4655 /* fill: %230E1822; */ %7D %3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpolygon class='shape' points='415.81 200 0 200 115.47 0 531.28 0 415.81 200' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+  background-color: rgb(255, 201, 85);
+  background-size: 200%;
+  background-position: 200%;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+.grid-cell:hover {
+  border: none;
+  background-color: beige;
+  cursor: pointer;
+  transform: translateY(-6px);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.8));
+  background-position: 40%;
+}
+
+/* BUTTON DENEME ///////////////////////////////////////////////////// */
+
+.grid-cell:nth-child(3),
+.grid-cell:nth-child(6),
+.grid-cell:nth-child(9) {
+  border-right: none;
+}
+
+.grid-cell:nth-child(7),
+.grid-cell:nth-child(8),
+.grid-cell:nth-child(9) {
+  border-bottom: none;
+}
+@media only screen and (max-width: 53.12em) {
+  .grid-cell {
+    background-image: none;
+  }
+}
+
 @media only screen and (max-width: 28.12em) {
   .grid-cell {
     padding: 0;
@@ -268,26 +309,32 @@ html {
 }
 
 .grid-cell-blocked {
-  background-color: #dda15e;
+  background-color: #ff6961;
 }
 
 .grid-cell-winner {
   transform: translateY(-8px);
-  background-color: #606c38;
+  background-color: #80a65f;
   animation: winnerAnimation 1.5s infinite;
   backface-visibility: hidden;
   color: white;
 }
 
+.winner-name {
+  color: #101010c2;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 @keyframes winnerAnimation {
   0% {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
   }
   100% {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 }
 
@@ -297,6 +344,9 @@ html {
   cursor: pointer;
   transform: translateY(-6px);
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.8));
+}
+.grid-cell:active {
+  transform: translateY(-2px);
 }
 
 .players-container {
@@ -340,17 +390,21 @@ html {
 }
 
 .player-score {
-  color: #ddb688;
+  color: #ff6961;
 }
 
 .active {
   color: rgb(255, 201, 85);
-  scale: 1.15;
+  scale: 1.1;
   transform: translateY(3px);
 }
 
 .replay-button {
-  background-color: rgb(255, 201, 85);
+  background-image: linear-gradient(
+    to left bottom,
+    rgb(250 85 85),
+    rgb(255 201 85)
+  );
   border: none;
   padding: 1.5rem 4rem;
   box-shadow: 4px 4px 8px #00000046;
@@ -362,6 +416,7 @@ html {
   transition: all 0.3s;
   border-radius: 3px;
   margin-left: 2rem;
+  outline: 4px solid transparent;
 }
 @media only screen and (max-width: 90em) {
   .replay-button {
@@ -378,15 +433,19 @@ html {
 }
 
 .replay-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-5px);
   box-shadow: 4px 8px 8px #00000046;
   background-color: rgb(53, 53, 53);
   color: #fff;
 }
 
 .replay-button:active {
-  box-shadow: 4px 4px 8px #00000046;
+  box-shadow: 2px 2px 6px #00000046;
   transform: translateY(0);
+}
+
+.replay-button:focus {
+  outline: 4px solid #efdbb5;
 }
 
 /* MODAL */
