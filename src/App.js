@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./index.css";
-// LAYOUT
-// export default function App() {
-//   return (
-//     // <div className="app">
-//     //   <Header />
-//     //   <GridContainer />
-//     // </div>
-//   );
-// }
 
 // Header
 function Header() {
   return <header className="header">XØX</header>;
+}
+
+// Replay button clears area
+function Replay({ onReset }) {
+  return (
+    <button onClick={onReset} type="reset" className="replay-button">
+      Replay
+    </button>
+  );
 }
 
 // Grid container
@@ -21,11 +22,24 @@ export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [player, setPlayer] = useState(true);
 
+  // Score states
+  const [scoreX, setScoreX] = useState(0);
+  const [scoreO, setScoreO] = useState(0);
+
+  // Updates ScoreX
+  function handleScoreX() {
+    setScoreX((score) => score + 1);
+  }
+
+  // Updates ScoreO
+  function handleScoreO() {
+    setScoreO((score) => score + 1);
+  }
+
   // To render buttons 9 time
-  // [0, 1, 2, 3, 4, 5, 6, 7, 8]
   const nums = Array.from({ length: 9 }, (_, i) => i);
 
-  // Clicked button dedect with num prop
+  // Clicked button with num prop
   function handleClick(i) {
     // If already clicked or a winner, do nothing.
     if (squares[i] || calculateWinner(squares)) return;
@@ -64,8 +78,6 @@ export default function App() {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        //: To do scores
-
         // Return X or O by equality.
         return squares[a];
       }
@@ -89,20 +101,39 @@ export default function App() {
     }
   }
 
+  // To avoid infinite loop using out of the if block
+  useEffect(() => {
+    // Use useEffect to update scores after each render
+    if (winner) {
+      // If any winner
+      winner === "X" ? handleScoreX() : handleScoreO();
+    }
+  }, [winner]);
+
+  // Reset function
   function handleReset() {
     setSquares(Array(9).fill(null));
     setPlayer(true);
   }
 
+  function handleCloseModal() {
+    setScoreO(0);
+    setScoreX(0);
+  }
+
+  const score5 = scoreO || scoreX === 5;
+
   return (
     <div className="app">
+      {score5 && (
+        <WinnerModal winner={winner} handleCloseModal={handleCloseModal} />
+      )}
       <div className="header-replay">
         <Header />
         <Replay onReset={handleReset} />
       </div>
       <div className="game-container">
         <div className="grid-container">
-          {/* Creates 9 buttons also "values" equals "nums" */}
           {nums.map((num) => {
             return (
               <GridCells
@@ -113,9 +144,16 @@ export default function App() {
               />
             );
           })}
+          {/* Creates 9 buttons also "values" equals "nums" */}
         </div>
         {/* Change the content */}
-        <Players status={status} player={player} />
+        <Players
+          scoreO={scoreO}
+          scoreX={scoreX}
+          winner={winner}
+          status={status}
+          player={player}
+        />
       </div>
     </div>
   );
@@ -137,14 +175,14 @@ function GridCells({ value, onSquareClick, winner }) {
 }
 
 // Container holds player names and scores.
-function Players({ status }) {
+function Players({ status, scoreX, scoreO }) {
   return (
     <div className="players-container">
       <div className="players player--1">
         <h1 className={`player-name ${status === "X" ? "active" : ""}`}>
           Player X
         </h1>
-        <span className="player-score">Score: </span>
+        <span className="player-score">ScoreX || {scoreX} </span>
       </div>
       <div className="players">
         <span className="player-turn">
@@ -155,16 +193,42 @@ function Players({ status }) {
         <h1 className={`player-name ${status === "O" ? "active" : ""}`}>
           Player O
         </h1>
-        <span className="player-score">Score: </span>
+        <span className="player-score">ScoreO || {scoreO} </span>
       </div>
     </div>
   );
 }
 
-function Replay({ onReset }) {
+// Modal for winner situation
+function WinnerModal({ handleCloseModal, winner }) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  function closeModal() {
+    setIsOpen(false);
+    handleCloseModal();
+  }
   return (
-    <button onClick={onReset} type="reset" className="replay-button">
-      Replay
-    </button>
+    <>
+      {isOpen && (
+        <TransitionGroup className="modal-overlay" onClick={closeModal}>
+          <CSSTransition
+            in={isOpen}
+            appear={true}
+            timeout={300} // Animasyon süresi (ms)
+            classNames="modal"
+            unmountOnExit
+          >
+            <div className="modal">
+              <span className="close" onClick={closeModal}>
+                &times;
+              </span>
+              <div className="modal-content">
+                <p className="modal-text">Winner {winner}</p>
+              </div>
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
+      )}
+    </>
   );
 }

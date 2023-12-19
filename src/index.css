@@ -18,6 +18,10 @@
 /* @media only screen and (max-width: 90em) {
 } */
 
+/* 1000px */
+/* @media only screen and (max-width: 62.5em) {
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -29,6 +33,7 @@
 #root {
   width: 100dvw;
   height: 100dvh;
+  /* transition: all 0.3s; */
 }
 
 html {
@@ -272,8 +277,6 @@ html {
   animation: winnerAnimation 1.5s infinite;
   backface-visibility: hidden;
   color: white;
-  outline-offset: -2rem;
-  outline: 1rem solid rgba(0, 0, 0, 0.637);
 }
 
 @keyframes winnerAnimation {
@@ -336,6 +339,10 @@ html {
   font-size: 3rem;
 }
 
+.player-score {
+  color: #ddb688;
+}
+
 .active {
   color: rgb(255, 201, 85);
   scale: 1.15;
@@ -348,8 +355,6 @@ html {
   padding: 1.5rem 4rem;
   box-shadow: 4px 4px 8px #00000046;
   cursor: pointer;
-  outline-offset: -8px;
-  outline: 4px solid rgb(53 53 53 / 85%);
   font-size: 4rem;
   font-family: "Nunito", sans-serif;
   font-weight: bold;
@@ -373,13 +378,114 @@ html {
 }
 
 .replay-button:hover {
-  color: rgb(53 53 53);
-  outline: 4px solid rgb(53 53 53);
   transform: translateY(-2px);
   box-shadow: 4px 8px 8px #00000046;
+  background-color: rgb(53, 53, 53);
+  color: #fff;
 }
 
 .replay-button:active {
   box-shadow: 4px 4px 8px #00000046;
   transform: translateY(0);
+}
+
+/* MODAL */
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* Modal Container */
+.modal {
+  background-color: #efdbb5;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 40dvw;
+  text-align: center;
+  position: relative;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 40px;
+  color: #101010da;
+  top: 0;
+}
+
+/* Modal Content */
+.modal-content {
+  margin-top: 10px;
+}
+
+.modal-text {
+  font-size: 8rem;
+  color: #7c8b47;
+  font-weight: bold;
+}
+@media only screen and (max-width: 62.5em) {
+  .modal-text {
+    font-size: 6rem;
+  }
+
+  .close {
+    font-size: 30px;
+  }
+}
+
+/* 450px */
+@media only screen and (max-width: 28.12em) {
+  .modal-text {
+    font-size: 4rem;
+  }
+
+  .close {
+    font-size: 25px;
+  }
+}
+
+/* Modal opening situation */
+.modal-appear {
+  opacity: 0;
+  z-index: 1;
+  transform: scale(0.8);
+}
+
+.modal-appear-done {
+  opacity: 0;
+  transform: scale(1);
+}
+
+.modal-enter {
+  transform: scale(0.8);
+}
+
+.modal-enter-done {
+  opacity: 1;
+  transition: all 300ms;
+  transform: scale(1);
+}
+
+/* Modal closing situation */
+.modal-exit {
+  opacity: 1;
+}
+
+.modal-exit .modal-exit-active {
+  opacity: 0;
+  transition: opacity 300ms linear;
 }
