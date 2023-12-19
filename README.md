@@ -18,3 +18,5 @@
 
 In order to be able to play the Project / Game without installation ⏬
 <a href="https://xox-game-kadir.netlify.app/">XOX Game</a>
+
+<img src="src/XOX-GAME.gif">
